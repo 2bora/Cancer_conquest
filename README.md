@@ -58,6 +58,10 @@ Vascular_Invation, K-ras, Adjuvant_Tx,recurrence, PCEA, Harvested_LNs, Lnmeta_nu
 
 - train, dev, test set을 구성할 때 censored data의 비율을 동일하게 넣기 위해서 위에서 만든 Censored_dataframe 활용
 
+- hidden layer 1개인 mlp 모델 
+
 - score는 c-index를 활용 (survival duration과 survival probability를 비교해 c-index 계산)
 
 > c-index 계산법 : https://academic.oup.com/ndt/article/25/5/1399/1843002의 Example 1 참조 
+
+
