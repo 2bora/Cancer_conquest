@@ -43,25 +43,12 @@ Vascular_Invation, K-ras, Adjuvant_Tx,recurrence, PCEA, Harvested_LNs, Lnmeta_nu
 **2. censored data**
 
         1(censored되지 않은 기간 동안), 
-        d/n(censored 된 시점 부터, d = the number of deceased subjects, n = total number of subjects alive at the beginning of time, Kaplan-Meier hazard probabilities)
+        1-d/n(censored 된 시점 부터, d = the number of deceased subjects, n = total number of subjects alive at the beginning of time, Kaplan-Meier hazard probabilities)
         
 ## 4. Censored_dataframe
 <img width="1277" alt="2018-04-30 12 17 36" src="https://user-images.githubusercontent.com/30252311/39414271-82c03310-4c70-11e8-8242-23651e33dea3.png">
 - 환자별로 각 time interval에서 censored여부를 나타냄(censored = 1, un-censored = 0)
 
 ## 5. Model description
-- 각 time interval 별로 모델 학습 및 스코어 구함 
-
-- train, dev, test set을 구성할 때 censored data의 비율을 동일하게 넣기 위해서 위에서 만든 Censored_dataframe 활용
-
-> 처음에는 아웃풋 노드가 18개인 모델을 구성했었는데, 그렇게 하면 각 타임 인터벌마다 프리딕션을 하는 data set을 만들기에 부적절한 것 같아서 일단 이렇게...
-
-- train, dev, test set을 구성할 때 censored data의 비율을 동일하게 넣기 위해서 위에서 만든 Censored_dataframe 활용
-
-- hidden layer 1개인 mlp 모델 
-
-- score는 c-index를 활용 (survival duration과 survival probability를 비교해 c-index 계산)
-
-> c-index 계산법 : https://academic.oup.com/ndt/article/25/5/1399/1843002의 Example 1 참조 
 
 
