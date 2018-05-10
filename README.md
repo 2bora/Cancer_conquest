@@ -50,5 +50,5 @@ Vascular_Invation, K-ras, Adjuvant_Tx,recurrence, PCEA, Harvested_LNs, Lnmeta_nu
 - 환자별로 각 time interval에서 censored여부를 나타냄(censored = 1, un-censored = 0)
 
 ## 5. Model description
-
+- RNN, MLP, SLP 세가지 모델로 test 중
 
