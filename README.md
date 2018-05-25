@@ -56,15 +56,11 @@ x_yr survival|overall|y_trn|y_dev|y_tst
 5|1=208,0=44|160(132/28)|41(34/7)|51(42/9)
 7|1=124,0=49|110(79/31)|28(20/8)|35(25/10)
 
-## 4. Censored_dataframe
-<img width="1277" alt="2018-04-30 12 17 36" src="https://user-images.githubusercontent.com/30252311/39414271-82c03310-4c70-11e8-8242-23651e33dea3.png">
-- 환자별로 각 time interval에서 censored여부를 나타냄(censored = 1, un-censored = 0)
-
-## 5. Model description
+## 4. Model description
 - MLP, SLP 모델로 test 
 
-## 6. Result
-### 6-1. Score
+## 5. Result
+### 5-1. Score
 
 year|binary_SLP_auc|binary_MLP_auc|time_SLP_auc|time_MLP_auc|timeSLP_Cindex|timeMLP_Cindex
 --|--|--|--|--|--|--
