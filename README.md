@@ -2,7 +2,7 @@
 
 ## 1. Objective
 - 대장암 환자들의 Clinical 정보(후에 유전정보, 이미지 정보도 추가될 예정)를 가지고 특정 time interval마다 각 환자의 생존 확률 예측.
-- 현재 코드에서는 time interval을 1년으로 지정
+- 3,5,7년 후 생존여부 예측을 위해서 1년 time interval에서의 생존 확률 예측하는 모델과 3,5,7년 후 생존여부(0/1)를 바이너리로 예측하는 모델 각각 build
 
 ## 2. Input Data
 - Clinical information list(ALL)
@@ -32,6 +32,7 @@
 Vascular_Invation, K-ras, Adjuvant_Tx,recurrence, PCEA, Harvested_LNs, Lnmeta_num만 Input data로 사용
 
 ## 3. Output Data
+### 3-1. Survival Probability Prediction for each Time interval 
 <img width="1279" alt="2018-04-30 11 46 36" src="https://user-images.githubusercontent.com/30252311/39414122-2417da26-4c6f-11e8-86df-1fdd2ceb58f4.png">
 
 - 환자별로 각 time interval에서 생존확률을 Output으로 지정
@@ -45,10 +46,28 @@ Vascular_Invation, K-ras, Adjuvant_Tx,recurrence, PCEA, Harvested_LNs, Lnmeta_nu
         1(censored되지 않은 기간 동안), 
         1-d/n(censored 된 시점 부터, d = the number of deceased subjects, n = total number of subjects alive at the beginning of time, Kaplan-Meier hazard probabilities)
         
+### 3-2. Survival binary prediction for 3,5,7 year
+- 3년 생존율을 구할 때는 3년 이전에 censored 된 데이터는 제외 (5, 7년 분석시에도 동일하게)
+- 1 = 생존, 0 = 사망, 아래표에서 숫자는 [전체 sample 수(생존 sample 수/사망 sample 수)]를 나타냄
+
+x_yr survival|overall|y_trn|y_dev|y_tst
+--|--|--|--|--
+3|1=372,0=35|260(237/23)|66(60/6)|82(75/7)
+5|1=208,0=44|160(132/28)|41(34/7)|51(42/9)
+7|1=124,0=49|110(79/31)|28(20/8)|35(25/10)
+
 ## 4. Censored_dataframe
 <img width="1277" alt="2018-04-30 12 17 36" src="https://user-images.githubusercontent.com/30252311/39414271-82c03310-4c70-11e8-8242-23651e33dea3.png">
 - 환자별로 각 time interval에서 censored여부를 나타냄(censored = 1, un-censored = 0)
 
 ## 5. Model description
-- RNN, MLP, SLP 세가지 모델로 test 중
+- MLP, SLP 모델로 test 
 
+## 6. Result
+### 6-1. Score
+
+year|binary_SLP_auc|binary_MLP_auc|time_SLP_auc|time_MLP_auc|timeSLP_Cindex|timeMLP_Cindex
+--|--|--|--|--|--|--
+3|0.641524|0.706286|0.786667|0.716952|0.773900|0.725073
+5|0.662434|0.759788|0.806349|0.789418|0.780226|0.745122
+7|0.676000|0.744800|0.743200|0.714400|0.697204|0.678235
